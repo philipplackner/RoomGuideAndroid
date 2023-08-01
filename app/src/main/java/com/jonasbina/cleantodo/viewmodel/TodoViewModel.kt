@@ -1,5 +1,10 @@
 package com.jonasbina.cleantodo.viewmodel
 
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jonasbina.cleantodo.model.Todo
@@ -18,13 +23,17 @@ class TodoViewModel(
 
 
     private val _todos =dao.getTodos().stateIn(viewModelScope, SharingStarted.WhileSubscribed(), emptyList())
+    var todosTodo = _todos.value.filter { it.state == 0 }
+    var todosDoing = _todos.value.filter { it.state == 1 }
+    var todosPriority = _todos.value.filter { it.state == 2 }
+    var todosDone = _todos.value.filter { it.state == 3 }
 
-    private val _state = MutableStateFlow(TodoState())
+    private val _state = MutableStateFlow(TodoState(todosPriority = todosPriority, todosTodo = todosTodo, todosDone = todosDone, todosDoing = todosDoing))
     val state = combine(_state, _todos) { state, todos ->
         state.copy(
             todos = todos,
         )
-    }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), TodoState())
+    }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), TodoState(todosPriority = todosPriority, todosTodo = todosTodo, todosDone = todosDone, todosDoing = todosDoing))
 
     fun onEvent(event: TodoEvent) {
         when(event) {

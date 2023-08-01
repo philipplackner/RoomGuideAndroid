@@ -16,6 +16,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -23,16 +24,27 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewModelScope
 import com.jonasbina.cleantodo.model.Todo
 import com.jonasbina.cleantodo.model.TodoEvent
 import com.jonasbina.cleantodo.model.TodoState
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.stateIn
 
 @Composable
 fun TodoScreen(
     state: TodoState,
-    onEvent: (TodoEvent) -> Unit
+    onEvent: (TodoEvent) -> Unit,
+
 ) {
 
+    var categories = mapOf(
+        "Priority" to Pair(Color.Red, 2),
+        "Doing" to Pair(Color.Yellow, 1 ),
+        "ToDo" to Pair(Color.Cyan, 0 ),
+        "Done" to Pair(Color.Green, 3 )
+    )
     Scaffold(
         floatingActionButton = {
             FloatingActionButton(onClick = {
@@ -62,17 +74,12 @@ fun TodoScreen(
                 Text(text = "CleanTodo", fontSize = 25.sp, fontWeight = FontWeight.Bold)
             }
 
-            val categories = mapOf(
-                "Priority" to Pair(Color.Red, state.todosPriority),
-                "Doing" to Pair(Color.Yellow, state.todosDoing),
-                "ToDo" to Pair(Color.Cyan, state.todosTodo),
-                "Done" to Pair(Color.Green, state.todosDone)
-            )
+
             for (e in categories) {
                 item {
                     DisplayTodoCategoryHeader(categoryName = e.key, categoryColor = e.value.first)
                 }
-                items(e.value.second) { todo ->
+                items(state.todos.filter { it.state==e.value.second }) { todo ->
                     DisplayTodo(todo = todo, onEvent = onEvent)
                 }
             }
@@ -82,10 +89,10 @@ fun TodoScreen(
 }
 @Composable
 fun DisplayTodoCategoryHeader(categoryName: String, categoryColor: Color) {
-    Row(Modifier.fillMaxWidth()) {
+    Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
         Box(
             modifier = Modifier
-                .size(20.dp)
+                .size(15.dp)
                 .clip(CircleShape)
                 .background(categoryColor)
         )

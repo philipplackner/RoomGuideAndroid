@@ -23,17 +23,13 @@ class TodoViewModel(
 
 
     private val _todos =dao.getTodos().stateIn(viewModelScope, SharingStarted.WhileSubscribed(), emptyList())
-    var todosTodo = _todos.value.filter { it.state == 0 }
-    var todosDoing = _todos.value.filter { it.state == 1 }
-    var todosPriority = _todos.value.filter { it.state == 2 }
-    var todosDone = _todos.value.filter { it.state == 3 }
 
-    private val _state = MutableStateFlow(TodoState(todosPriority = todosPriority, todosTodo = todosTodo, todosDone = todosDone, todosDoing = todosDoing))
-    val state = combine(_state, _todos) { state, todos ->
+    private val _state = MutableStateFlow(TodoState())
+    val state = combine(_state, _todos) { state, todos->
         state.copy(
-            todos = todos,
+            todos = todos
         )
-    }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), TodoState(todosPriority = todosPriority, todosTodo = todosTodo, todosDone = todosDone, todosDoing = todosDoing))
+    }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), TodoState())
 
     fun onEvent(event: TodoEvent) {
         when(event) {

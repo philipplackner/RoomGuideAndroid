@@ -1,4 +1,4 @@
-package com.plcoding.roomguideandroid.ui.theme
+package com.plcoding.cleantodo.ui.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.MaterialTheme
@@ -28,7 +28,7 @@ private val LightColorPalette = lightColors(
 )
 
 @Composable
-fun RoomGuideAndroidTheme(
+fun CleanTodoTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable () -> Unit
 ) {

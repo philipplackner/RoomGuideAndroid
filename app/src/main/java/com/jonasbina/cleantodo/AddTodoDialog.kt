@@ -1,4 +1,4 @@
-package com.plcoding.roomguideandroid
+package com.jonasbina.cleantodo
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -14,48 +14,40 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun AddContactDialog(
-    state: ContactState,
-    onEvent: (ContactEvent) -> Unit,
+fun AddTodoDialog(
+    state: TodoState,
+    onEvent: (TodoEvent) -> Unit,
     modifier: Modifier = Modifier
 ) {
     AlertDialog(
         modifier = modifier,
         onDismissRequest = {
-            onEvent(ContactEvent.HideDialog)
+            onEvent(TodoEvent.HideDialog)
         },
-        title = { Text(text = "Add contact") },
+        title = { Text(text = "Add todo") },
         text = {
             Column(
                 verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 TextField(
-                    value = state.firstName,
+                    value = state.title,
                     onValueChange = {
-                        onEvent(ContactEvent.SetFirstName(it))
+                        onEvent(TodoEvent.SetTitle(it))
                     },
                     placeholder = {
-                        Text(text = "First name")
+                        Text(text = "Title")
                     }
                 )
                 TextField(
-                    value = state.lastName,
+                    value = state.description,
                     onValueChange = {
-                        onEvent(ContactEvent.SetLastName(it))
+                        onEvent(TodoEvent.SetDescription(it))
                     },
                     placeholder = {
-                        Text(text = "Last name")
+                        Text(text = "Description")
                     }
                 )
-                TextField(
-                    value = state.phoneNumber,
-                    onValueChange = {
-                        onEvent(ContactEvent.SetPhoneNumber(it))
-                    },
-                    placeholder = {
-                        Text(text = "Phone number")
-                    }
-                )
+
             }
         },
         buttons = {
@@ -64,7 +56,7 @@ fun AddContactDialog(
                 contentAlignment = Alignment.CenterEnd
             ) {
                 Button(onClick = {
-                    onEvent(ContactEvent.SaveContact)
+                    onEvent(TodoEvent.SaveTodo)
                 }) {
                     Text(text = "Save")
                 }

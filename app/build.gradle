@@ -5,13 +5,13 @@ plugins {
 }
 
 android {
-    namespace 'com.plcoding.roomguideandroid'
-    compileSdk 33
+    namespace 'com.jonasbina.cleantodo'
+    compileSdk 34
 
     defaultConfig {
-        applicationId "com.plcoding.roomguideandroid"
+        applicationId "com.jonasbina.cleantodo"
         minSdk 24
-        targetSdk 33
+        targetSdk 34
         versionCode 1
         versionName "1.0"
 

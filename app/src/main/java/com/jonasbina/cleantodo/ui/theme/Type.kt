@@ -1,4 +1,4 @@
-package com.plcoding.roomguideandroid.ui.theme
+package com.plcoding.cleantodo.ui.theme
 
 import androidx.compose.material.Typography
 import androidx.compose.ui.text.TextStyle

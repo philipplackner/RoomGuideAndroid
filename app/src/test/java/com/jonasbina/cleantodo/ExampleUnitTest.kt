@@ -1,4 +1,4 @@
-package com.plcoding.roomguideandroid
+package com.jonasbina.cleantodo
 
 import org.junit.Test
 

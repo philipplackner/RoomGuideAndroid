@@ -1,4 +1,4 @@
-package com.jonasbina.cleantodo
+package com.jonasbina.cleantodo.model
 
 import androidx.room.Database
 import androidx.room.RoomDatabase

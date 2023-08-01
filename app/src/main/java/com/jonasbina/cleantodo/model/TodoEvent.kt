@@ -1,4 +1,4 @@
-package com.jonasbina.cleantodo
+package com.jonasbina.cleantodo.model
 
 sealed interface TodoEvent {
     object SaveTodo : TodoEvent
@@ -9,6 +9,7 @@ sealed interface TodoEvent {
     data class DeleteTodo(val todo: Todo) : TodoEvent
     data class ShowEditDialog(val todo: Todo) : TodoEvent
     object HideEditDialog : TodoEvent
-    data class UpdateTodo(val title: String, val description: String, val state: Int, val uid : Long) : TodoEvent
+    data class UpdateTodo(val title: String, val description: String, val state: Int, val uid : Long) :
+        TodoEvent
 
 }

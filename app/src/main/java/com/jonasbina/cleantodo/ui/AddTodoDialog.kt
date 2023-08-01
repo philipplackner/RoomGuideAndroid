@@ -1,4 +1,4 @@
-package com.jonasbina.cleantodo
+package com.jonasbina.cleantodo.ui
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -12,6 +12,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.jonasbina.cleantodo.model.TodoEvent
+import com.jonasbina.cleantodo.model.TodoState
 
 @Composable
 fun AddTodoDialog(

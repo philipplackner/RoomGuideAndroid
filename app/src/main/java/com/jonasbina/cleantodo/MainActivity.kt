@@ -9,6 +9,9 @@ import androidx.compose.runtime.getValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.room.Room
+import com.jonasbina.cleantodo.model.TodoDatabase
+import com.jonasbina.cleantodo.ui.TodoScreen
+import com.jonasbina.cleantodo.viewmodel.TodoViewModel
 import com.plcoding.cleantodo.ui.theme.CleanTodoTheme
 
 class MainActivity : ComponentActivity() {

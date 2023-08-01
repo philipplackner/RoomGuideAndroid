@@ -1,7 +1,11 @@
-package com.jonasbina.cleantodo
+package com.jonasbina.cleantodo.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.jonasbina.cleantodo.model.Todo
+import com.jonasbina.cleantodo.model.TodoDao
+import com.jonasbina.cleantodo.model.TodoEvent
+import com.jonasbina.cleantodo.model.TodoState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.*

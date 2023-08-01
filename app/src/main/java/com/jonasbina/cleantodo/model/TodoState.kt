@@ -1,4 +1,4 @@
-package com.jonasbina.cleantodo
+package com.jonasbina.cleantodo.model
 
 data class TodoState(
     val todos: List<Todo> = emptyList(),

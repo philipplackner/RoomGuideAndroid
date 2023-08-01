@@ -62,20 +62,24 @@ fun TodoScreen(
                 Text(text = "CleanTodo", fontSize = 25.sp, fontWeight = FontWeight.Bold)
             }
 
-            val categories = mapOf("Priority" to Pair(Color.Red,state.todosPriority),"Doing" to Pair(Color.Yellow,state.todosDoing),"ToDo" to Pair(Color.Cyan,state.todosTodo),"Done" to Pair(Color.Green,state.todosDone))
-            for (e in categories){
-            item {
-                DisplayTodoCategoryHeader(categoryName = e.key, categoryColor = e.value.first)
-            }
-            items(e.value.second) { todo ->
-                DisplayTodo(todo = todo, onEvent = onEvent)
-            }
+            val categories = mapOf(
+                "Priority" to Pair(Color.Red, state.todosPriority),
+                "Doing" to Pair(Color.Yellow, state.todosDoing),
+                "ToDo" to Pair(Color.Cyan, state.todosTodo),
+                "Done" to Pair(Color.Green, state.todosDone)
+            )
+            for (e in categories) {
+                item {
+                    DisplayTodoCategoryHeader(categoryName = e.key, categoryColor = e.value.first)
+                }
+                items(e.value.second) { todo ->
+                    DisplayTodo(todo = todo, onEvent = onEvent)
+                }
             }
 
         }
     }
 }
-
 @Composable
 fun DisplayTodoCategoryHeader(categoryName: String, categoryColor: Color) {
     Row(Modifier.fillMaxWidth()) {
